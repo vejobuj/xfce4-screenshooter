@@ -92,7 +92,8 @@ am_lib_libscreenshooter_la_OBJECTS = $(am__objects_1) \
 	lib/lib_libscreenshooter_la-screenshooter-job.lo \
 	lib/lib_libscreenshooter_la-screenshooter-simple-job.lo \
 	lib/lib_libscreenshooter_la-screenshooter-utils.lo \
-	lib/lib_libscreenshooter_la-screenshooter-zimagez.lo
+	lib/lib_libscreenshooter_la-screenshooter-zimagez.lo \
+	lib/lib_libscreenshooter_la-screenshooter-imgur.lo
 lib_libscreenshooter_la_OBJECTS =  \
 	$(am_lib_libscreenshooter_la_OBJECTS)
 lib_libscreenshooter_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
@@ -242,6 +243,10 @@ CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
+CURL_CFLAGS = @CURL_CFLAGS@
+CURL_LIBS = @CURL_LIBS@
+CURL_REQUIRED_VERSION = @CURL_REQUIRED_VERSION@
+CURL_VERSION = @CURL_VERSION@
 CYGPATH_W = @CYGPATH_W@
 DATADIRNAME = @DATADIRNAME@
 DEFS = @DEFS@
@@ -281,6 +286,10 @@ INTLTOOL_EXTRACT = @INTLTOOL_EXTRACT@
 INTLTOOL_MERGE = @INTLTOOL_MERGE@
 INTLTOOL_PERL = @INTLTOOL_PERL@
 INTLTOOL_UPDATE = @INTLTOOL_UPDATE@
+JSON_GLIB_CFLAGS = @JSON_GLIB_CFLAGS@
+JSON_GLIB_LIBS = @JSON_GLIB_LIBS@
+JSON_GLIB_REQUIRED_VERSION = @JSON_GLIB_REQUIRED_VERSION@
+JSON_GLIB_VERSION = @JSON_GLIB_VERSION@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
 LIBOBJS = @LIBOBJS@
@@ -413,7 +422,8 @@ lib_libscreenshooter_la_SOURCES = \
 	lib/screenshooter-job.c lib/screenshooter-job.h \
 	lib/screenshooter-simple-job.c lib/screenshooter-simple-job.h \
 	lib/screenshooter-utils.c lib/screenshooter-utils.h \
-	lib/screenshooter-zimagez.c lib/screenshooter-zimagez.h
+	lib/screenshooter-zimagez.c lib/screenshooter-zimagez.h \
+	lib/screenshooter-imgur.c lib/screenshooter-imgur.h
 
 lib_libscreenshooter_la_CFLAGS = \
 	-I$(top_srcdir)	\
@@ -422,6 +432,8 @@ lib_libscreenshooter_la_CFLAGS = \
 	@LIBXFCE4UTIL_CFLAGS@ \
 	@LIBXFCEGUI4_CFLAGS@ \
 	@SOUP_CFLAGS@ \
+	@CURL_CFLAGS@ \
+	@JSON_GLIB_CFLAGS@ \
   -DPACKAGE_LOCALE_DIR=\"$(localedir)\"
 
 lib_libscreenshooter_la_LIBADD = \
@@ -429,7 +441,9 @@ lib_libscreenshooter_la_LIBADD = \
 	@LIBXFCE4UTIL_LIBS@ \
 	@LIBXFCEGUI4_LIBS@ \
   @GLIB_LIBS@ \
-	@SOUP_LIBS@
+	@SOUP_LIBS@ \
+	@CURL_LIBS@ \
+	@JSON_GLIB_LIBS@
 
 lib_libscreenshooter_built_sources = \
 	lib/screenshooter-marshal.c lib/screenshooter-marshal.h
@@ -447,6 +461,8 @@ src_xfce4_screenshooter_CFLAGS = \
 	@LIBXFCEGUI4_CFLAGS@ \
 	@GTHREAD_CFLAGS@ \
 	@SOUP_CFLAGS@ \
+	@CURL_CFLAGS@ \
+	@JSON_GLIB_CFLAGS@ \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"
 
 src_xfce4_screenshooter_LDFLAGS = \
@@ -474,6 +490,8 @@ panel_plugin_xfce4_screenshooter_plugin_CFLAGS = \
 	-I$(top_srcdir)/lib/	\
 	@LIBXFCE4PANEL_CFLAGS@ \
 	@GTHREAD_CFLAGS@ \
+	@CURL_CFLAGS@ \
+	@JSON_GLIB_CFLAGS@ \
 	@SOUP_CFLAGS@
 
 panel_plugin_xfce4_screenshooter_plugin_LDFLAGS = \
@@ -825,6 +843,8 @@ lib/lib_libscreenshooter_la-screenshooter-utils.lo:  \
 	lib/$(am__dirstamp) lib/$(DEPDIR)/$(am__dirstamp)
 lib/lib_libscreenshooter_la-screenshooter-zimagez.lo:  \
 	lib/$(am__dirstamp) lib/$(DEPDIR)/$(am__dirstamp)
+lib/lib_libscreenshooter_la-screenshooter-imgur.lo:  \
+	lib/$(am__dirstamp) lib/$(DEPDIR)/$(am__dirstamp)
 lib/libscreenshooter.la: $(lib_libscreenshooter_la_OBJECTS) $(lib_libscreenshooter_la_DEPENDENCIES) lib/$(am__dirstamp)
 	$(lib_libscreenshooter_la_LINK)  $(lib_libscreenshooter_la_OBJECTS) $(lib_libscreenshooter_la_LIBADD) $(LIBS)
 install-binPROGRAMS: $(bin_PROGRAMS)
@@ -931,6 +951,8 @@ mostlyclean-compile:
 	-rm -f lib/lib_libscreenshooter_la-screenshooter-utils.lo
 	-rm -f lib/lib_libscreenshooter_la-screenshooter-zimagez.$(OBJEXT)
 	-rm -f lib/lib_libscreenshooter_la-screenshooter-zimagez.lo
+	-rm -f lib/lib_libscreenshooter_la-screenshooter-imgur.$(OBJEXT)
+	-rm -f lib/lib_libscreenshooter_la-screenshooter-imgur.lo
 	-rm -f lib/lib_libscreenshooter_la-sexy-url-label.$(OBJEXT)
 	-rm -f lib/lib_libscreenshooter_la-sexy-url-label.lo
 	-rm -f panel-plugin/panel_plugin_xfce4_screenshooter_plugin-screenshooter-plugin.$(OBJEXT)
@@ -950,6 +972,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@lib/$(DEPDIR)/lib_libscreenshooter_la-screenshooter-simple-job.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@lib/$(DEPDIR)/lib_libscreenshooter_la-screenshooter-utils.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@lib/$(DEPDIR)/lib_libscreenshooter_la-screenshooter-zimagez.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@lib/$(DEPDIR)/lib_libscreenshooter_la-screenshooter-imgur.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@lib/$(DEPDIR)/lib_libscreenshooter_la-sexy-url-label.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@panel-plugin/$(DEPDIR)/panel_plugin_xfce4_screenshooter_plugin-screenshooter-plugin.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/src_xfce4_screenshooter-main.Po@am__quote@
@@ -1061,6 +1084,13 @@ lib/lib_libscreenshooter_la-screenshooter-zimagez.lo: lib/screenshooter-zimagez.
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='lib/screenshooter-zimagez.c' object='lib/lib_libscreenshooter_la-screenshooter-zimagez.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_libscreenshooter_la_CFLAGS) $(CFLAGS) -c -o lib/lib_libscreenshooter_la-screenshooter-zimagez.lo `test -f 'lib/screenshooter-zimagez.c' || echo '$(srcdir)/'`lib/screenshooter-zimagez.c
+
+lib/lib_libscreenshooter_la-screenshooter-imgur.lo: lib/screenshooter-imgur.c
+@am__fastdepCC_TRUE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_libscreenshooter_la_CFLAGS) $(CFLAGS) -MT lib/lib_libscreenshooter_la-screenshooter-imgur.lo -MD -MP -MF lib/$(DEPDIR)/lib_libscreenshooter_la-screenshooter-imgur.Tpo -c -o lib/lib_libscreenshooter_la-screenshooter-imgur.lo `test -f 'lib/screenshooter-imgur.c' || echo '$(srcdir)/'`lib/screenshooter-imgur.c
+@am__fastdepCC_TRUE@	mv -f lib/$(DEPDIR)/lib_libscreenshooter_la-screenshooter-imgur.Tpo lib/$(DEPDIR)/lib_libscreenshooter_la-screenshooter-imgur.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='lib/screenshooter-imgur.c' object='lib/lib_libscreenshooter_la-screenshooter-imgur.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_libscreenshooter_la_CFLAGS) $(CFLAGS) -c -o lib/lib_libscreenshooter_la-screenshooter-imgur.lo `test -f 'lib/screenshooter-imgur.c' || echo '$(srcdir)/'`lib/screenshooter-imgur.c
 
 panel-plugin/panel_plugin_xfce4_screenshooter_plugin-screenshooter-plugin.o: panel-plugin/screenshooter-plugin.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(panel_plugin_xfce4_screenshooter_plugin_CFLAGS) $(CFLAGS) -MT panel-plugin/panel_plugin_xfce4_screenshooter_plugin-screenshooter-plugin.o -MD -MP -MF panel-plugin/$(DEPDIR)/panel_plugin_xfce4_screenshooter_plugin-screenshooter-plugin.Tpo -c -o panel-plugin/panel_plugin_xfce4_screenshooter_plugin-screenshooter-plugin.o `test -f 'panel-plugin/screenshooter-plugin.c' || echo '$(srcdir)/'`panel-plugin/screenshooter-plugin.c

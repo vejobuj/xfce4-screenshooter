@@ -763,6 +763,14 @@ XML2PO
 ENABLE_XSLTPROC_FALSE
 ENABLE_XSLTPROC_TRUE
 XSLTPROC
+CURL_REQUIRED_VERSION
+CURL_LIBS
+CURL_CFLAGS
+CURL_VERSION
+JSON_GLIB_REQUIRED_VERSION
+JSON_GLIB_LIBS
+JSON_GLIB_CFLAGS
+JSON_GLIB_VERSION
 SOUP_REQUIRED_VERSION
 SOUP_LIBS
 SOUP_CFLAGS
@@ -12875,6 +12883,171 @@ $as_echo "$xdt_cv_PKG_CONFIG_VERSION" >&6; }
     fi
   fi
 
+  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for json-glib-1.0 >= 0.7.6" >&5
+$as_echo_n "checking for json-glib-1.0 >= 0.7.6... " >&6; }
+  if $PKG_CONFIG "--atleast-version=0.7.6" "json-glib-1.0" >/dev/null 2>&1; then
+    JSON_GLIB_VERSION=`$PKG_CONFIG --modversion "json-glib-1.0"`
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $JSON_GLIB_VERSION" >&5
+$as_echo "$JSON_GLIB_VERSION" >&6; }
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking JSON_GLIB_CFLAGS" >&5
+$as_echo_n "checking JSON_GLIB_CFLAGS... " >&6; }
+    JSON_GLIB_CFLAGS=`$PKG_CONFIG --cflags "json-glib-1.0"`
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $JSON_GLIB_CFLAGS" >&5
+$as_echo "$JSON_GLIB_CFLAGS" >&6; }
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking JSON_GLIB_LIBS" >&5
+$as_echo_n "checking JSON_GLIB_LIBS... " >&6; }
+    JSON_GLIB_LIBS=`$PKG_CONFIG --libs "json-glib-1.0"`
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $JSON_GLIB_LIBS" >&5
+$as_echo "$JSON_GLIB_LIBS" >&6; }
+
+    JSON_GLIB_REQUIRED_VERSION=0.7.6
+
+
+
+
+
+
+
+  elif $PKG_CONFIG --exists "json-glib-1.0" >/dev/null 2>&1; then
+    xdt_cv_version=`$PKG_CONFIG --modversion "json-glib-1.0"`
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: found, but $xdt_cv_version" >&5
+$as_echo "found, but $xdt_cv_version" >&6; }
+
+
+      echo "*** The required package json-glib-1.0 was found on your system,"
+      echo "*** but the installed version ($xdt_cv_version) is too old."
+      echo "*** Please upgrade json-glib-1.0 to atleast version 0.7.6, or adjust"
+      echo "*** the PKG_CONFIG_PATH environment variable if you installed"
+      echo "*** the new version of the package in a nonstandard prefix so"
+      echo "*** pkg-config is able to find it."
+      exit 1
+
+  else
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: not found" >&5
+$as_echo "not found" >&6; }
+
+
+      echo "*** The required package json-glib-1.0 was not found on your system."
+      echo "*** Please install json-glib-1.0 (atleast version 0.7.6) or adjust"
+      echo "*** the PKG_CONFIG_PATH environment variable if you"
+      echo "*** installed the package in a nonstandard prefix so that"
+      echo "*** pkg-config is able to find it."
+      exit 1
+
+  fi
+
+
+  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for libcurl >= 7.19" >&5
+$as_echo_n "checking for libcurl >= 7.19... " >&6; }
+  if $PKG_CONFIG "--atleast-version=7.19" "libcurl" >/dev/null 2>&1; then
+    CURL_VERSION=`$PKG_CONFIG --modversion "libcurl"`
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $CURL_VERSION" >&5
+$as_echo "$CURL_VERSION" >&6; }
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking CURL_CFLAGS" >&5
+$as_echo_n "checking CURL_CFLAGS... " >&6; }
+    CURL_CFLAGS=`$PKG_CONFIG --cflags "libcurl"`
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $CURL_CFLAGS" >&5
+$as_echo "$CURL_CFLAGS" >&6; }
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking CURL_LIBS" >&5
+$as_echo_n "checking CURL_LIBS... " >&6; }
+    CURL_LIBS=`$PKG_CONFIG --libs "libcurl"`
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $CURL_LIBS" >&5
+$as_echo "$CURL_LIBS" >&6; }
+
+    CURL_REQUIRED_VERSION=7.19
+
+
+
+
+
+
+
+  elif $PKG_CONFIG --exists "libcurl" >/dev/null 2>&1; then
+    xdt_cv_version=`$PKG_CONFIG --modversion "libcurl"`
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: found, but $xdt_cv_version" >&5
+$as_echo "found, but $xdt_cv_version" >&6; }
+
+
+      echo "*** The required package libcurl was found on your system,"
+      echo "*** but the installed version ($xdt_cv_version) is too old."
+      echo "*** Please upgrade libcurl to atleast version 7.19, or adjust"
+      echo "*** the PKG_CONFIG_PATH environment variable if you installed"
+      echo "*** the new version of the package in a nonstandard prefix so"
+      echo "*** pkg-config is able to find it."
+      exit 1
+
+  else
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: not found" >&5
+$as_echo "not found" >&6; }
+
+
+      echo "*** The required package libcurl was not found on your system."
+      echo "*** Please install libcurl (atleast version 7.19) or adjust"
+      echo "*** the PKG_CONFIG_PATH environment variable if you"
+      echo "*** installed the package in a nonstandard prefix so that"
+      echo "*** pkg-config is able to find it."
+      exit 1
+
+  fi
+
+  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for libcurl >= 7.19" >&5
+$as_echo_n "checking for libcurl >= 7.19... " >&6; }
+  if $PKG_CONFIG "--atleast-version=7.19" "libcurl" >/dev/null 2>&1; then
+    CURL_VERSION=`$PKG_CONFIG --modversion "libcurl"`
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $CURL_VERSION" >&5
+$as_echo "$CURL_VERSION" >&6; }
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking CURL_CFLAGS" >&5
+$as_echo_n "checking CURL_CFLAGS... " >&6; }
+    CURL_CFLAGS=`$PKG_CONFIG --cflags "libcurl"`
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $CURL_CFLAGS" >&5
+$as_echo "$CURL_CFLAGS" >&6; }
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking CURL_LIBS" >&5
+$as_echo_n "checking CURL_LIBS... " >&6; }
+    CURL_LIBS=`$PKG_CONFIG --libs "libcurl"`
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $CURL_LIBS" >&5
+$as_echo "$CURL_LIBS" >&6; }
+
+    CURL_REQUIRED_VERSION=7.19
+
+
+
+
+
+
+
+  elif $PKG_CONFIG --exists "libcurl" >/dev/null 2>&1; then
+    xdt_cv_version=`$PKG_CONFIG --modversion "libcurl"`
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: found, but $xdt_cv_version" >&5
+$as_echo "found, but $xdt_cv_version" >&6; }
+
+
+      echo "*** The required package libcurl was found on your system,"
+      echo "*** but the installed version ($xdt_cv_version) is too old."
+      echo "*** Please upgrade libcurl to atleast version 7.19, or adjust"
+      echo "*** the PKG_CONFIG_PATH environment variable if you installed"
+      echo "*** the new version of the package in a nonstandard prefix so"
+      echo "*** pkg-config is able to find it."
+      exit 1
+
+  else
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: not found" >&5
+$as_echo "not found" >&6; }
+
+
+      echo "*** The required package libcurl was not found on your system."
+      echo "*** Please install libcurl (atleast version 7.19) or adjust"
+      echo "*** the PKG_CONFIG_PATH environment variable if you"
+      echo "*** installed the package in a nonstandard prefix so that"
+      echo "*** pkg-config is able to find it."
+      exit 1
+
+  fi
 
   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for libsoup-2.4 >= 2.26.0" >&5
 $as_echo_n "checking for libsoup-2.4 >= 2.26.0... " >&6; }
